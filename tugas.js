@@ -3,18 +3,18 @@ class Kapal {
         this.nama = nama;
         this.jenis = jenis;
         this.panjang = panjang;
-        this.lebar = lebar; 
+        this.lebar = lebar;
     }
 
     infokapal() {
-        return `Kapal ${this.nama} merupakan jenis ${this.jenis} yang berukuran ${this.panjang}m x ${this.lebar}m.`;
+        return `Kapal ${this.nama} merupakan jenis ${this.jenis} yang berukuran ${this.panjang} m x ${this.lebar} m.`;
     }
 }
 
 class KapalPenumpang extends Kapal {
     constructor(nama, jenis, panjang, lebar, kapasitaspenumpang) {
-        super(nama, jenis, panjang, lebar); 
-        this.kapasitaspenumpang = kapasitaspenumpang; 
+        super(nama, jenis, panjang, lebar);
+        this.kapasitaspenumpang = kapasitaspenumpang;
     }
 
     infokapal() {
@@ -47,10 +47,10 @@ class TiketKapal extends KapalPenumpang {
 class PembelianTiketKapal extends TiketKapal {
     constructor(nama, jenis, panjang, lebar, kapasitaspenumpang, jumlahTiket, hargaTiket) {
         super(nama, jenis, panjang, lebar, kapasitaspenumpang, jumlahTiket);
-        this.hargaTiket = hargaTiket;
-        this.tujuan = null; 
-        this.hariKeberangkatan = null; 
-        this.jamKeberangkatan = null; 
+        this.hargaTiket = hargaTiket; // Make sure this is a number without commas
+        this.tujuan = null;
+        this.hariKeberangkatan = null;
+        this.jamKeberangkatan = null;
     }
 
     pilihTujuan(tujuan) {
@@ -59,7 +59,7 @@ class PembelianTiketKapal extends TiketKapal {
             this.tujuan = tujuan;
             return `Anda telah memilih tujuan ke ${tujuan}.`;
         } else {
-            return `Pilih tujuan keberangkatan.`;
+            return `Pilih tujuan keberangkatan yang valid.`;
         }
     }
 
@@ -90,19 +90,18 @@ class PembelianTiketKapal extends TiketKapal {
 
         let totalHarga = jumlahBeli * this.hargaTiket;
         let hasilPembelian = this.kurangiTiket(jumlahBeli);
-        return `${hasilPembelian} Tujuan: ${this.tujuan}. Keberangkatan pada hari ${this.hariKeberangkatan}, jam ${this.jamKeberangkatan}. Total harga: Rp${totalHarga}.`;
+        return `${hasilPembelian} Tujuan: ${this.tujuan}. Keberangkatan pada hari ${this.hariKeberangkatan}, jam ${this.jamKeberangkatan}. Total harga: Rp${totalHarga.toLocaleString('id-ID')}.`;
     }
 }
 
-
-const kapalFerry = new PembelianTiketKapal("Budi Siregar", "ferry", 200, 150, 1000, 950, 250,000);
+const kapalFerry = new PembelianTiketKapal("Budi Siregar", "ferry", 200, 150, 1000, 950, 250000);
 
 console.log(kapalFerry.infokapal());
 console.log(kapalFerry.infoTiket());
-console.log(kapalFerry.pilihTujuan("Paris")); 
-console.log(kapalFerry.aturHariKeberangkatan("Senin")); 
-console.log(kapalFerry.aturJamKeberangkatan("14:30")); 
-console.log(kapalFerry.pembelianTiket(7)); 
-console.log(kapalFerry.aturHariKeberangkatan("Jumat")); 
-console.log(kapalFerry.aturJamKeberangkatan("11:20")); 
-console.log(kapalFerry.pembelianTiket(1)); 
+console.log(kapalFerry.pilihTujuan("Paris"));
+console.log(kapalFerry.aturHariKeberangkatan("Senin"));
+console.log(kapalFerry.aturJamKeberangkatan("14:30"));
+console.log(kapalFerry.pembelianTiket(7));
+console.log(kapalFerry.aturHariKeberangkatan("Jumat"));
+console.log(kapalFerry.aturJamKeberangkatan("11:20"));
+console.log(kapalFerry.pembelianTiket(1));
